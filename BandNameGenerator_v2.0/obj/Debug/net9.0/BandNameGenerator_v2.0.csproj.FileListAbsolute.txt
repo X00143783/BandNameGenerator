@@ -12,3 +12,4 @@ C:\Users\trace\Documents\GitHub\DevopsCA2\BandNameGenerator_v2.0\obj\Debug\net9.
 C:\Users\trace\Documents\GitHub\DevopsCA2\BandNameGenerator_v2.0\obj\Debug\net9.0\BandNameGenerator_v2.0.pdb
 C:\Users\trace\Documents\GitHub\DevopsCA2\BandNameGenerator_v2.0\obj\Debug\net9.0\BandNameGenerator_v2.0.genruntimeconfig.cache
 C:\Users\trace\Documents\GitHub\DevopsCA2\BandNameGenerator_v2.0\obj\Debug\net9.0\ref\BandNameGenerator_v2.0.dll
+C:\Users\trace\Documents\GitHub\DevopsCA2\BandNameGenerator_v2.0\obj\Debug\net9.0\BandNameGenerator_v2.0.sourcelink.json
