@@ -2,22 +2,19 @@ trigger:
 - main  # Trigger the pipeline on changes to 'main'
 
 pool:
-  vmImage: ubuntu-latest  # Running the pipeline on Ubuntu
+  vmImage: ubuntu-latest  # Using Ubuntu as the base image
 
 steps:
-- checkout: self  # Checkout code from GitHub repository
+- script: echo "Running the pipeline"
+  displayName: 'Run Pre-build Steps'
 
-# Build process (example)
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    projects: '**/*.csproj'
-  displayName: 'Build .NET Core Project'
+# Ensure Git config is set up for commit and push
+- script: |
+    git config --global user.email "youremail@example.com"
+    git config --global user.name "Your Name"
+  displayName: 'Set Git User Information'
 
-# Optional: Generate or modify files here, if needed
-# For example, modify or generate output in Program.cs or other files
-
-# Step: Check for changes and only commit if necessary
+# Verify if there are changes and commit them
 - script: |
     git diff --quiet || echo "Changes detected"
     git add .  # Add all changes (if any)
@@ -29,4 +26,9 @@ steps:
     fi
   displayName: 'Commit and Push Changes to GitHub (if any)'
 
-# Finish the pipeline
+# List build directory to ensure files are being generated correctly
+- script: |
+    ls -la $(Build.ArtifactStagingDirectory)  # Check if program files are generated
+  displayName: 'List Build Directory'
+
+
