@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BandNameGenerator_v2.0")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c0eba43ab4a66574ebc0962d93181c25f89c87f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4de9ae3a00f01793aeefb05ed3046f9cf3e0f611")]
 [assembly: System.Reflection.AssemblyProductAttribute("BandNameGenerator_v2.0")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BandNameGenerator_v2.0")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
