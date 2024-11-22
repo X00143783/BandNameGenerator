@@ -31,4 +31,16 @@ steps:
     ls -la $(Build.ArtifactStagingDirectory)  # Check if program files are generated
   displayName: 'List Build Directory'
 
+# Copy files to artifact staging directory (if needed)
+- task: CopyFiles@2
+  inputs:
+    contents: '**/*.dll'  # Include other files if necessary (e.g., .exe, .config)
+    targetFolder: '$(Build.ArtifactStagingDirectory)'  # Target artifact staging directory
+  displayName: 'Copy Files to Staging Directory'
 
+# Publish build artifacts (so they can be used in deployment or downloaded)
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'  # The path where files are staged
+    artifactName: 'drop'  # The name of the artifact being published
+  displayName: 'Publish Build Artifacts'
