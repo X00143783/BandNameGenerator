@@ -4,22 +4,48 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+  branches:
+    include:
+      - main  # or your default branch (e.g., master)
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'windows-latest'
+
+variables:
+  buildConfiguration: 'Release'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: Checkout@2
+  displayName: 'Checkout code from GitHub'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
-
-    - task: PublishBuildArtifacts@1
+- task: UseDotNet@2
   inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: 'drop'
+    packageType: 'sdk'
+    version: '6.x'  # Use the appropriate version for your project
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- task: Restore@1
+  inputs:
+    projectFile: '**/*.csproj'
+
+- task: Build@1
+  inputs:
+    solution: '**/*.sln'
+    buildConfiguration: $(buildConfiguration)
+
+- task: Publish@1
+  inputs:
+    publishWebProjects: false
+    solution: '**/*.sln'
+    zipAfterPublish: false
+    buildConfiguration: $(buildConfiguration)
+    outputPath: '$(Build.ArtifactStagingDirectory)'
+
+# Commit and push changes (if necessary)
+- script: |
+    git config --global user.email "youremail@example.com"
+    git config --global user.name "Your Name"
+    git add .
+    git commit -m "Auto commit from Azure Pipeline"
+    git push origin main  # or the branch you're working with
+  displayName: 'Commit and Push changes back to GitHub'
