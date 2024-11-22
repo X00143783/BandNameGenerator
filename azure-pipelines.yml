@@ -16,13 +16,23 @@ steps:
 
 # Verify if there are changes and commit them
 - script: |
+    echo "Checking Git status..."
     git status  # Check if there are any changes
     git diff     # Show differences before committing
     
-    git add .    # Add all modified files to staging area
-    git commit -m "Auto commit from Azure DevOps pipeline" || echo "No changes to commit"
+    # Stage all modified files
+    git add .    # Add all modified files to the staging area
+
+    # Commit changes if there are any, otherwise skip
+    if ! git diff --cached --quiet; then
+      git commit -m "Auto commit from Azure DevOps pipeline"
+      echo "Changes committed."
+    else
+      echo "No changes to commit."
+    fi
     
     # Push changes to the GitHub repository (ensure correct branch)
+    git remote -v  # Check the remote repository URL
     git push origin main  # Replace 'main' with your branch if different
   displayName: 'Commit and Push Changes to GitHub'
 
