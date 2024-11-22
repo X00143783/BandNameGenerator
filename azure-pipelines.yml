@@ -26,11 +26,11 @@ steps:
 
 - task: Restore@1
   inputs:
-    projectFile: '**/*.csproj'
+    projectFile: '**/*.csproj'  # Path to your .csproj file
 
 - task: Build@1
   inputs:
-    solution: '**/*.sln'
+    solution: '**/*.sln'  # Path to your .sln file
     buildConfiguration: $(buildConfiguration)
 
 - task: Publish@1
