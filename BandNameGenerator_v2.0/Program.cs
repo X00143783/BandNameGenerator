@@ -20,5 +20,8 @@ var input = "";
 //test comment
 string thatStreing = input;
 
+var firstName= "";
+var secondName="";
+var thirdName="";
 //proram doesnt end until key pressed
 Console.ReadKey();
