@@ -1,16 +1,34 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
 trigger:
-- main
+- main  # Trigger the pipeline on changes to 'main'
+
 pool:
-  vmImage: ubuntu-latest
+  vmImage: ubuntu-latest  # Using Ubuntu as the base image
+
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: echo "Running the pipeline"
+  displayName: 'Run Pre-build Steps'
+
+# Ensure Git config is set up for commit and push
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-  
+    git config --global user.email "youremail@example.com"
+    git config --global user.name "Your Name"
+  displayName: 'Set Git User Information'
+
+# Verify if there are changes and commit them
+- script: |
+    git status  # Check if there are any changes
+    git diff     # Show differences before committing
+    
+    git add .    # Add all modified files to staging area
+    git commit -m "Auto commit from Azure DevOps pipeline" || echo "No changes to commit"
+    
+    # Push changes to the GitHub repository (ensure correct branch)
+    git push origin main  # Replace 'main' with your branch if different
+  displayName: 'Commit and Push Changes to GitHub'
+
+# List build directory to ensure files are being generated correctly
+- script: |
+    ls -la $(Build.ArtifactStagingDirectory)  # Check if program files are generated
+  displayName: 'List Build Directory'
+
+
