@@ -14,5 +14,8 @@ Console.WriteLine("*           V_2.0              *");
 Console.WriteLine("*                              *");
 Console.WriteLine("**********************************");
 
+Console.WriteLine("How many words do you want in you band name?");
+var input = Console.ReadKey();
 
+//proram doesnt end until key pressed
 Console.ReadKey();
