@@ -15,7 +15,10 @@ Console.WriteLine("*                              *");
 Console.WriteLine("**********************************");
 
 Console.WriteLine("How many words do you want in you band name?");
-var input = Console.ReadKey();
+var input = "";
+ input = Console.ReadKey().ToString();
+//test comment
+string thatStreing = input;
 
 //proram doesnt end until key pressed
 Console.ReadKey();
